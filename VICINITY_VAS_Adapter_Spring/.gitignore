@@ -1,0 +1,6 @@
+# Exclude target folder
+target/**
+
+# Except war file
+
+!target/VICINITY_VAS_Adapter_Spring-0.0.1-SNAPSHOT.jar
