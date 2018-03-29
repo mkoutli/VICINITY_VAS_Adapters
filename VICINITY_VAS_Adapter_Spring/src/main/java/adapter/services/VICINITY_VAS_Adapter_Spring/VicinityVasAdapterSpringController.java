@@ -50,19 +50,45 @@ public class VicinityVasAdapterSpringController {
 	 *            Vicinity aid)
 	 * @param oid:
 	 *            the service id in the infrastructure (not the Vicinity oid)
+	 * @param tid:
+	 * 			  the task identifier returned from POST operation      
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/objects/{oid}/actions/{aid}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/objects/{oid}/actions/{aid}/tasks/{tid}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public Response generateResponseAction(@PathVariable("aid") String aid, @PathVariable("oid") String oid)
+	public Response generateResponseActionGT(@PathVariable("tid") String tid, @PathVariable("aid") String aid, @PathVariable("oid") String oid)
 			throws Exception {
-		System.out.println("Entered GET action");
+		System.out.println("Entered GET task of action");
 		// Do something with the inputs..
 
 		// Return the response
 		Response response = new Response(
-				"A request to VAS with id: " + oid + " to get the action with name: " + aid + " was made.");
+				"A request to VAS with id: " + oid + " to get the status of the action with name: " + aid + " and task id: " + tid +" was made.");
+		return response;
+	}
+	
+	/**
+	 * @param aid:
+	 *            the service action name in the infrastructure (not the
+	 *            Vicinity aid)
+	 * @param oid:
+	 *            the service id in the infrastructure (not the Vicinity oid)
+	 * @param tid:
+	 * 			  the task identifier returned from POST operation              
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/objects/{oid}/actions/{aid}/tasks/{tid}", method = RequestMethod.DELETE, produces = "application/json")
+	@ResponseBody
+	public Response generateResponseActionDT(@PathVariable("tid") String tid, @PathVariable("aid") String aid, @PathVariable("oid") String oid)
+			throws Exception {
+		System.out.println("Entered DELETE action task");
+		// Do something with the inputs..
+
+		// Return the response
+		Response response = new Response(
+				"A request to VAS with id: " + oid + " to delete the task with id: " + tid + " of the action with name: " + aid +" was made.");
 		return response;
 	}
 
@@ -76,6 +102,8 @@ public class VicinityVasAdapterSpringController {
 	 * @param oid:
 	 *            the device/service id in the infrastructure (not the Vicinity
 	 *            oid)
+	 * @param tid:
+	 * 			  the task identifier returned from POST operation             
 	 * @return
 	 * @throws Exception
 	 */

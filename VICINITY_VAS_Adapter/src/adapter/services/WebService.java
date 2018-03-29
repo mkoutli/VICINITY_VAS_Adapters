@@ -8,6 +8,7 @@ import adapter.services.Responses.Response;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,6 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 @Path("/objects")
  public class WebService {
 	
@@ -42,20 +44,44 @@ import javax.ws.rs.core.MediaType;
 	/**
 	 * @param aid: the service action name in the infrastructure (not the Vicinity aid)
 	 * @param oid: the service id in the infrastructure (not the Vicinity oid)
+	 * @param tid:
+	 * 			  the task identifier returned from POST operation 
 	 * @return
 	 * @throws Exception
 	 */
 	@GET
-    @Path("/{oid}/actions/{aid}")
+    @Path("/{oid}/actions/{aid}/tasks/{tid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response generateResponseAction(@PathParam("aid") String aid, @PathParam("oid") String oid) throws Exception {
-		System.out.println("Entered GET action");
+    public Response generateResponseAction(@PathParam("tid") String tid, @PathParam("aid") String aid, @PathParam("oid") String oid) throws Exception {
+		System.out.println("Entered GET task of action");
 		// Do something with the inputs..
 		
 		//Return the response
-        Response response = new Response("A request to VAS with id: " + oid + " to get the action with name: " + aid + " was made.");
+        Response response = new Response("A request to VAS with id: " + oid + " to get the status of the action with name: " + aid + " and task id: " + tid +" was made.");
         return response;
     }
+	
+	/**
+	 * @param aid: the service action name in the infrastructure (not the Vicinity aid)
+	 * @param oid: the service id in the infrastructure (not the Vicinity oid)
+	 * @param tid:
+	 * 			  the task identifier returned from POST operation 
+	 * @return
+	 * @throws Exception
+	 */
+	@DELETE
+	@Path("/{oid}/actions/{aid}/tasks/{tid}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public Response generateResponseActionDT(@PathParam("tid") String tid, @PathParam("aid") String aid, @PathParam("oid") String oid)
+			throws Exception {
+		System.out.println("Entered DELETE action task");
+		// Do something with the inputs..
+
+		// Return the response
+		Response response = new Response(
+				"A request to VAS with id: " + oid + " to delete the task with id: " + tid + " of the action with name: " + aid +" was made.");
+		return response;
+	}
 	
 	//////////////////////////////////////////// property ///////////////////////////////////////////////////////
 	
